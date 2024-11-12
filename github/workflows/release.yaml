@@ -2,8 +2,8 @@ name: Release
 
 on:
   push:
-    tags:
-      - 'latest'
+    branches:
+      - main
 
 jobs:
   build:
@@ -35,3 +35,4 @@ jobs:
         with:
           files: build/chrome-mv3-prod.zip
           tag_name: 'latest'
+          name: 'Latest release'
