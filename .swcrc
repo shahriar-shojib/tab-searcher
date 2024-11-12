@@ -1,0 +1,28 @@
+{
+	"$schema": "https://swc.rs/schema.json",
+	"jsc": {
+		"baseUrl": ".",
+		"paths": {
+			"~*": ["./*"],
+			"@/*": ["./*"]
+		},
+
+		"parser": {
+			"syntax": "typescript",
+			"jsx": true,
+			"tsx": true,
+			"dynamicImport": true
+		},
+		"transform": {
+			"react": {
+				"runtime": "automatic"
+			}
+		},
+		"target": "es2022",
+		"keepClassNames": true
+	},
+	"minify": false,
+	"module": {
+		"type": "es6"
+	}
+}
