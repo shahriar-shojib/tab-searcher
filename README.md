@@ -11,7 +11,7 @@ Open your browser and load the appropriate development build. For example, if yo
 
 You can start editing the popup by modifying `popup/index.tsx`. It should auto-update as you make changes.
 
-For further guidance, [visit our Documentation](https://docs.plasmo.com/)
+For further guidance, [visit plasmo Documentation](https://docs.plasmo.com/)
 
 ## Making production build
 
