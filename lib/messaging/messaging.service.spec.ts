@@ -24,7 +24,9 @@ describe('MessagingService', () => {
 	});
 
 	it('should call the correct listener with the correct payload', async () => {
-		const listener = jest.fn().mockResolvedValue([{ id: '1', title: 'Test' }]);
+		const result = { id: '1', title: 'Test' };
+
+		const listener = jest.fn().mockResolvedValue([result]);
 		messagingService.on('SEARCH', listener);
 
 		const res = await messagingService.handleMessage(
@@ -33,7 +35,7 @@ describe('MessagingService', () => {
 		);
 
 		expect(listener).toHaveBeenCalledWith({ query: 'test' });
-		expect(res).toBe([{ id: '1', title: 'Test' }]);
+		expect(res).toStrictEqual([result]);
 	});
 
 	it('should send the correct response', async () => {
