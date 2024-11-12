@@ -39,3 +39,4 @@ jobs:
           files: build/chrome-mv3-prod.zip
           tag_name: 'latest'
           name: 'Latest release'
+          token: ${{ secrets.GITHUB_TOKEN }}
