@@ -39,7 +39,7 @@ describe('MessagingService', () => {
 	});
 
 	it('should send the correct response', async () => {
-		const listener = jest.fn().mockResolvedValue(true);
+		const listener = jest.fn().mockResolvedValue('indexing');
 		messagingService.on('GET_INDEX_STATUS', listener);
 
 		const sendResponse = jest.fn();
@@ -49,7 +49,7 @@ describe('MessagingService', () => {
 			sendResponse
 		);
 
-		expect(listener).toHaveBeenCalledWith(undefined);
-		expect(sendResponse).toHaveBeenCalledWith(true);
+		expect(listener).toHaveBeenCalledWith({});
+		expect(sendResponse).toHaveBeenCalledWith('indexing');
 	});
 });
