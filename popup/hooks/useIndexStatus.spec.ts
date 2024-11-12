@@ -5,8 +5,6 @@ import { useIndexStatus } from './useIndexStatus';
 jest.mock('../../lib/messaging/sendMessage');
 const mockedSendMessage = sendMessage as jest.Mock;
 
-// const waitFor = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
-
 describe('useIndexStatus', () => {
 	beforeEach(() => {
 		jest.clearAllMocks();

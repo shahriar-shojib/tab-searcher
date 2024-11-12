@@ -1,11 +1,20 @@
 import { FC } from 'react';
 import { FuseDoc } from '~lib/search/search.service';
 
+/**
+ * Sets the specified tab as the active tab in the browser.
+ * @param tabId - The ID of the tab to activate.
+ */
 const setActiveTab = async (tabId: string) => {
 	await chrome.tabs.update(parseInt(tabId), { active: true });
 };
 
+/**
+ * Tab component that displays information about a browser tab.
+ * @param tab - The tab object containing information to display.
+ */
 export const Tab: FC<{ tab: FuseDoc }> = ({ tab }) => {
+	// Construct the favicon URL, using a default if none is provided
 	const faviconURL = tab.favicon || `https://www.google.com/s2/favicons?domain_url=${tab.url}`;
 
 	return (
@@ -18,6 +27,7 @@ export const Tab: FC<{ tab: FuseDoc }> = ({ tab }) => {
 					<div className="truncate text-lg">{tab.title}</div>
 				</div>
 			</div>
+			{/* Display the tab URL */}
 			<div className="text-blue-400 truncate">{tab.url}</div>
 		</div>
 	);

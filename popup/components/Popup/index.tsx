@@ -7,6 +7,7 @@ import { sendMessage } from '~lib/messaging/sendMessage';
 import { FuseDoc } from '~lib/search/search.service';
 import { Tab } from '../Tab/Tab';
 
+// Define the different states the component can be in
 type LoadedState = {
 	type: 'loaded';
 	data: FuseDoc[];
@@ -28,8 +29,10 @@ type InitState = {
 type State = LoadedState | LoadingState | ErrorState | InitState;
 
 export const Popup = () => {
+	// State to manage the current state of the component
 	const [data, setData] = useState<State>({ type: 'init' });
 
+	// Function to handle search queries
 	const handleSearch = useCallback(async (query: string) => {
 		if (!query) {
 			return;
@@ -44,6 +47,7 @@ export const Popup = () => {
 		}
 	}, []);
 
+	// Form submission handler
 	const onSubmit: FormEventHandler<HTMLFormElement> = useCallback(
 		(e) => {
 			e.preventDefault();
@@ -55,7 +59,7 @@ export const Popup = () => {
 		[handleSearch]
 	);
 
-	//do not allow concurrent search while a search is in progress
+	// Disable the search button while a search is in progress
 	const isButtonDisabled = useMemo(() => data.type === 'loading', [data.type]);
 	const formRef = useRef<HTMLFormElement>(null);
 
