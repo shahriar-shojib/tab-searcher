@@ -1,5 +1,5 @@
-import { FC } from 'react';
-import { FuseDoc } from '~lib/search/search.service';
+import type { FC } from 'react';
+import type { FuseDoc } from '~lib/search/search.service';
 
 /**
  * Sets the specified tab as the active tab in the browser.

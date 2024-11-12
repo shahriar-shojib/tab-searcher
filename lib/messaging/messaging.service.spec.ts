@@ -27,29 +27,25 @@ describe('MessagingService', () => {
 		const listener = jest.fn().mockResolvedValue([{ id: '1', title: 'Test' }]);
 		messagingService.on('SEARCH', listener);
 
-		const sendResponse = jest.fn();
-		await messagingService['handleMessage'](
+		const res = await messagingService.handleMessage(
 			{ type: 'SEARCH', payload: { query: 'test' } },
-			{} as chrome.runtime.MessageSender,
-			sendResponse
+			{} as chrome.runtime.MessageSender
 		);
 
 		expect(listener).toHaveBeenCalledWith({ query: 'test' });
-		expect(sendResponse).toHaveBeenCalledWith([{ id: '1', title: 'Test' }]);
+		expect(res).toBe([{ id: '1', title: 'Test' }]);
 	});
 
 	it('should send the correct response', async () => {
 		const listener = jest.fn().mockResolvedValue('indexing');
 		messagingService.on('GET_INDEX_STATUS', listener);
 
-		const sendResponse = jest.fn();
-		await messagingService['handleMessage'](
+		const res = await messagingService.handleMessage(
 			{ type: 'GET_INDEX_STATUS', payload: {} as never },
-			{} as chrome.runtime.MessageSender,
-			sendResponse
+			{} as chrome.runtime.MessageSender
 		);
 
 		expect(listener).toHaveBeenCalledWith({});
-		expect(sendResponse).toHaveBeenCalledWith('indexing');
+		expect(res).toBe('indexing');
 	});
 });

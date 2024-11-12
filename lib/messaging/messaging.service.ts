@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { FuseDoc } from '~lib/search/search.service';
+import type { FuseDoc } from '~lib/search/search.service';
+import type { ExtractData } from './sendMessage';
 
 type SEARCH_EVENT = {
 	type: 'SEARCH';
@@ -36,30 +37,23 @@ export type MessagingEvents =
 export class MessagingService {
 	private listeners = new Map<MessagingEvents['type'], (payload: any) => any>();
 
-	constructor() {
-		chrome.runtime.onMessage.addListener(this.handleMessage.bind(this));
-	}
-
-	private async handleMessage(
-		request: Omit<MessagingEvents, 'returns'>,
-		_: chrome.runtime.MessageSender,
-		sendResponse: (response: any) => void
-	) {
+	async handleMessage(request: Omit<MessagingEvents, 'returns'>, _: chrome.runtime.MessageSender) {
 		const listener = this.listeners.get(request.type);
 
-		if (listener) {
-			const response = await listener(request.payload);
-			sendResponse(response);
+		if (!listener) {
+			console.log('no listener found for', request.type);
+			return;
 		}
+
+		const response = await listener(request.payload);
+		return response;
 	}
 
 	on<T extends MessagingEvents['type']>(
 		type: T,
 		listener: (
 			payload: Extract<MessagingEvents, { type: T }>['payload']
-		) =>
-			| Extract<MessagingEvents, { type: T }>['returns']
-			| Promise<Extract<MessagingEvents, { type: T }>['returns']>
+		) => Promise<ExtractData<T, 'returns'>>
 	) {
 		this.listeners.set(type, listener);
 

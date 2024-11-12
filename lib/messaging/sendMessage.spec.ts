@@ -8,7 +8,10 @@ describe('sendMessage', () => {
 
 	it('should resolve with the correct response', async () => {
 		const mockResponse = Promise.resolve(true);
-		jest.spyOn(chrome.runtime, 'sendMessage').mockResolvedValue(mockResponse);
+		jest.spyOn(chrome.runtime, 'sendMessage').mockImplementation(async (_, cb, __) => {
+			(cb as any)(mockResponse);
+			return true;
+		});
 
 		const result = await sendMessage('GET_INDEX_STATUS');
 		expect(result).toEqual(true);
@@ -28,8 +31,10 @@ describe('sendMessage', () => {
 
 	it('should reject with an error when chrome.runtime.sendMessage fails', async () => {
 		const mockError = new Error('sendMessage failed');
-		jest.spyOn(chrome.runtime, 'sendMessage').mockRejectedValue(mockError);
+		jest.spyOn(chrome.runtime, 'sendMessage').mockImplementation((_, _cb, __) => {
+			throw mockError;
+		});
 
-		await expect(sendMessage('GET_INDEX_STATUS')).rejects.toThrow('sendMessage failed');
+		expect(() => sendMessage('GET_INDEX_STATUS')).rejects.toThrow('sendMessage failed');
 	});
 });

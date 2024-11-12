@@ -1,10 +1,10 @@
 import { X } from 'lucide-react';
-import { FormEventHandler, useCallback, useMemo, useRef, useState } from 'react';
+import { type FormEventHandler, useCallback, useMemo, useRef, useState } from 'react';
 import { Button } from '~components/ui/button';
 import { Input } from '~components/ui/input';
 import { Skeleton } from '~components/ui/skeleton';
 import { sendMessage } from '~lib/messaging/sendMessage';
-import { FuseDoc } from '~lib/search/search.service';
+import type { FuseDoc } from '~lib/search/search.service';
 import { Tab } from '../Tab/Tab';
 
 // Define the different states the component can be in

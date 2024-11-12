@@ -14,9 +14,11 @@ export const useIndexStatus = () => {
 		const interval = setInterval(async () => {
 			const response = await sendMessage('GET_INDEX_STATUS');
 
-			setIndexed(response);
-			if (response === 'indexed') {
-				clearInterval(interval);
+			if (response) {
+				setIndexed(response);
+				if (response === 'indexed') {
+					clearInterval(interval);
+				}
 			}
 		}, 100);
 

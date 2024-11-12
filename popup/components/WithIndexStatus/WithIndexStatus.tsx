@@ -1,5 +1,5 @@
 import { LoaderIcon } from 'lucide-react';
-import { FC, PropsWithChildren } from 'react';
+import type { FC, PropsWithChildren } from 'react';
 import { Button } from '~components/ui/button';
 import { useIndexStatus } from '~popup/hooks/useIndexStatus';
 

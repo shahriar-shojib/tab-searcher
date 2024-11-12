@@ -1,8 +1,8 @@
-import { MessagingEvents } from '~lib/messaging/messaging.service';
+import type { MessagingEvents } from '~lib/messaging/messaging.service';
 
 type MessageTypes = MessagingEvents['type'];
 
-type ExtractData<Type extends MessageTypes, DataKey extends keyof MessagingEvents> = Extract<
+export type ExtractData<Type extends MessageTypes, DataKey extends keyof MessagingEvents> = Extract<
 	MessagingEvents,
 	{ type: Type }
 >[DataKey];
@@ -31,23 +31,20 @@ export const sendMessage = <T extends MessageTypes>(
 		let rejected = false;
 		const timeout = setTimeout(() => {
 			reject(new Error('There are no listeners for this event, or the event timed out'));
+			clearTimeout(timeout);
 			rejected = true;
 		}, 1000);
 
-		chrome.runtime
-			.sendMessage({
+		chrome.runtime.sendMessage(
+			{
 				type,
 				payload: payload[0]
-			})
-			.then((response) => {
+			},
+			(response) => {
 				if (rejected) return;
 				clearTimeout(timeout);
 				resolve(response);
-			})
-			.catch((error) => {
-				if (rejected) return;
-				clearTimeout(timeout);
-				reject(error);
-			});
+			}
+		);
 	});
 };

@@ -3,19 +3,18 @@
 	"exclude": ["node_modules"],
 	"include": [".plasmo/index.d.ts", "./**/*.ts", "./**/*.tsx"],
 	"compilerOptions": {
-		"strict": true,
 		"strictFunctionTypes": true,
 		"strictNullChecks": true,
 		"noUncheckedIndexedAccess": true,
 		"noImplicitReturns": true,
 		"noImplicitAny": true,
 		"noImplicitThis": true,
-		"verbatimModuleSyntax": false,
+		"verbatimModuleSyntax": true,
 		"useUnknownInCatchVariables": false,
+		"tsBuildInfoFile": "node_modules/test.tsbuildinfo",
 
 		"paths": {
-			"~*": ["./*"],
-			"@/*": ["./*"]
+			"~*": ["./*"]
 		},
 		"baseUrl": "."
 	}

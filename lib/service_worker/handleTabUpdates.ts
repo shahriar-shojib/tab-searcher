@@ -1,4 +1,4 @@
-import { FuseDoc, SearchService } from '~lib/search/search.service';
+import { type FuseDoc, SearchService } from '~lib/search/search.service';
 
 export const onTabUpdate = (searchService: SearchService) => {
 	return async (tabId: number, changeInfo: chrome.tabs.TabChangeInfo, tab: chrome.tabs.Tab) => {

@@ -7,7 +7,8 @@
 	"license": "MIT",
 	"scripts": {
 		"dev": "plasmo dev",
-		"build": "tsc --noEmit && plasmo build",
+		"prebuild": "tsc --noEmit",
+		"build": "plasmo build",
 		"package": "plasmo package",
 		"test": "jest",
 		"lint": "eslint . "
