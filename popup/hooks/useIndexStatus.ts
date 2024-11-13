@@ -4,7 +4,6 @@ import { sendMessage } from '~lib/messaging/sendMessage';
 
 /**
  * Custom hook to manage the index status and provide functions to reload tabs or continue without reload.
- * @returns {Object} - An object containing the index status, reloadAll function, and continueWithoutReload function.
  */
 export const useIndexStatus = () => {
 	const [indexStatus, setIndexed] = useState<IndexStatus>('indexing');

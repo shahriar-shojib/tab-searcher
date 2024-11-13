@@ -24,10 +24,29 @@ type SET_RELOAD_REQUIRED_FALSE_EVENT = {
 	returns: void;
 };
 
+type SWITCH_TAB_EVENT = {
+	type: 'SWITCH_TAB';
+	payload: {
+		tabId: number;
+		keyword: string;
+	};
+	returns: void;
+};
+
+type REMOVE_MARK_EVENT = {
+	type: 'REMOVE_MARK';
+	payload: {
+		tabId: number;
+	};
+	returns: void;
+};
+
 export type MessagingEvents =
 	| SEARCH_EVENT
 	| GET_INDEX_STATUS_EVENT
-	| SET_RELOAD_REQUIRED_FALSE_EVENT;
+	| SET_RELOAD_REQUIRED_FALSE_EVENT
+	| SWITCH_TAB_EVENT
+	| REMOVE_MARK_EVENT;
 
 /**
  * Strongly typed Messaging service to communicate between background and popup

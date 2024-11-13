@@ -59,8 +59,6 @@ export const getCurrentTabs = async (): Promise<{ docs: FuseDoc[]; needsReload: 
 		});
 	}
 
-	console.log('fuseDocs', fuseDocs);
-
 	return {
 		docs: fuseDocs.filter((e): e is FuseDoc => {
 			if (e === 'error') {
